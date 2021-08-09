@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="./chronometer.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Convert Time Units</title>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div id="me" class="hero">
+                <h2>Time Converter</h2>
+                <div class="c__v">
+                    <label for="hour">Hours </label>
+                    <input type="text" id="hour" v-model="hour" placeholder="00">
+                </div>
+                <div class="c__v">
+                    <label for="minute">Minutes </label>
+                    <input type="text" id="minute" v-model="minute" placeholder="00">
+                </div>
+                <div class="c__v">
+                    <label for="second">Seconds </label>
+                    <input type="text" id="second" v-model="second"  placeholder="00">
+                </div>
+                <button id="btn"  @click="resetInput">Reset</button>
+                <p>Created By Soufiane M'channa Thanks all <span>&#10084;</span></p>
+            </div>
+        </div>
+    </div>
+    <!-- script -->
+    <script src="./js/vue.js"></script>
+    <script>
+        document.getElementById("btn").addEventListener("click",()=>{
+            document.querySelectorAll("input").forEach(input => input.value="")
+        })
+        var vm = new Vue({
+            el:"#me",
+            data:{
+                hour:0,
+                minute:0,
+                second:0
+            },
+            methods: {
+                resetInput(){
+                    this.hour = ""
+                    this.minute = ""
+                    this.second = ""
+                }
+            },
+            watch:{
+                hour: function(v){
+                    this.minute = v * 60
+                },
+                minute: function(v){
+                    this.hour = v / 60
+                    this.second = v * 60
+                },
+                second: function(v){
+                    this.minute = v / 60
+                }
+            }
+        })
+    </script>
+</body>
+</html>
